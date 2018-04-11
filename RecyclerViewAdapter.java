@@ -27,16 +27,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    Blog abc;
     Context context;
     List<Blog> MainList;
-    List<String> keyList;
-    DatabaseReference myref ;
-    DatabaseReference mychild,mlike,mcheck;
 
 
     boolean mprocesslike = false;
     public Boolean aBoolean;
+    public Blog blog;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -49,9 +46,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public  void onBindViewHolder(final ViewHolder holder, int position) {
 
-        myref = FirebaseDatabase.getInstance().getReference().child( "messages" );
         holder.name.setText(blog.getName());
                     holder.aphone.setText(blog.getAphone());
                     holder.phone.setText( blog.getPhone() );
@@ -99,7 +95,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public void clear()
     {
-        int size = this.MainImageUploadInfoList.size();
+        int size = this.MainList.size();
         if (size > 0)
         {
             for (int i = 0;i<size;i++)
@@ -109,7 +105,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     private void delete(int i) {
-        MainImageUploadInfoList.remove(i);
+        MainList.remove(i);
         notifyItemRemoved(i);
     }
 }
