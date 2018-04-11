@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     public RecyclerView recyclerView;
     List<Blog> blogs= new ArrayList<>(  );
     RecyclerViewAdapter adapter;
+    Blog abc;
 
 
     DatabaseReference myRef ;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
         myRef=FirebaseDatabase.getInstance().getReference().child( "messages" );
+        myRef.keepSynced( true );
         recyclerView = (RecyclerView) findViewById( R.id.recycler );
         recyclerView.setHasFixedSize( true );
         recyclerView.setLayoutManager( new LinearLayoutManager( this ) );
@@ -39,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
                     // whenever data at this location is updated.
                 for(DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
-
+                blogs = (List<Blog>) snapshot.getValue();
+                    blogs.add( new Blog( "aphone","name","email", "phone","msg" ) );
                 }
             }
 
